@@ -6,6 +6,7 @@ JAR_PACKAGES = ['org.postgresql:postgresql:42.7.4']
 class TimescaleDBLoader(JdbcLoader, variant='timescaledb'):
     driver_name = 'postgresql'
     driver_jdbc = 'org.postgresql.Driver'
+    _dialect = 'timescaledb'
 
     def build_jdbc_url(self):
         url = (
