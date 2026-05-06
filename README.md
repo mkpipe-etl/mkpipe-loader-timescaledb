@@ -60,7 +60,7 @@ Control how data is written to TimescaleDB:
 | Strategy | TimescaleDB Behavior |
 |---|---|
 | `append` | Plain `INSERT` via JDBC (default for incremental) |
-| `replace` | Drop and recreate table, then insert (default for full) |
+| `replace` | Drop and recreate table, then insert (default for full). Use `if_exists: append` to preserve existing table |
 | `upsert` | `INSERT ... ON CONFLICT (write_key) DO UPDATE` via temp table |
 | `merge` | Same as upsert for TimescaleDB |
 
@@ -99,6 +99,7 @@ Control how data is written to TimescaleDB:
 | `write_partitions` | int | — | Coalesce DataFrame to N partitions before writing |
 | `write_strategy` | string | — | `append`, `replace`, `upsert`, `merge` |
 | `write_key` | list | — | Key columns for upsert/merge (required) |
+| `if_exists` | string | — | `replace` (drop+create) or `append` (preserve table). Inherits from settings |
 | `dedup_columns` | list | — | Columns used for `mkpipe_id` hash deduplication |
 | `tags` | list | `[]` | Tags for selective pipeline execution |
 | `pass_on_error` | bool | `false` | Skip table on error instead of failing |
